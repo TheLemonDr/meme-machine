@@ -48,49 +48,59 @@
     }
   </style>
   <script>
-    var intervalId;
+var intervalId;
+var images = [
+  "assets/ninja.jpg",
+  "assets/fsh.gif",
+  "assets/hedoinit.jpg",
+  "assets/iseeu.gif",
+  "assets/merica.png",
+  "assets/clown.png",
+  "assets/seggs.png",
+  "assets/hedouble.png",
+  "assets/none.jpeg",
+  "assets/nuke.jpeg",
+  "assets/touch.jpeg",
+  "assets/woman.jpg",
+  "assets/wow.jpg",
+  "assets/tag.jpg",
+  "assets/mrbeef.jpg",
+  "assets/top.jpg",
+  "assets/hehe.jpg",
+  "assets/bibbity.jpg",
+  "assets/food.gif",
+  "assets/dank.gif",
+  "assets/mom.gif",
+  "assets/herobrine.png"
+];
+var usedImages = [];
 
-    function loadRandomImage() {
-      var images = [
-        "assets/ninja.jpg",
-        "assets/fsh.gif",
-        "assets/hedoinit.jpg",
-        "assets/iseeu.gif",
-        "assets/merica.png",
-        "assets/clown.png",
-        "assets/seggs.png",
-        "assets/hedouble.png",
-        "assets/none.jpeg",
-        "assets/nuke.jpeg",
-        "assets/touch.jpeg",
-        "assets/woman.jpg",
-        "assets/wow.jpg",
-        "assets/tag.jpg",
-        "assets/mrbeef.jpg",
-        "assets/top.jpg",
-        "assets/hehe.jpg",
-        "assets/bibbity.jpg",
-        "assets/food.gif",
-        "assets/dank.gif",
-        "assets/mom.gif",
-        "assets/herobrine.png"
-      ];
+function loadRandomImage() {
+  if (usedImages.length === images.length) {
+    usedImages = [];
+  }
 
-      var randomIndex = Math.floor(Math.random() * images.length);
-      var randomImage = images[randomIndex];
+  var availableImages = images.filter(function (image) {
+    return !usedImages.includes(image);
+  });
 
-      document.getElementById("random-image").src = randomImage;
-    }
+  var randomIndex = Math.floor(Math.random() * availableImages.length);
+  var randomImage = availableImages[randomIndex];
 
-    function toggleAutoLoad() {
-      var button = document.getElementById("toggle-button");
+  usedImages.push(randomImage);
+  document.getElementById("random-image").src = randomImage;
+}
 
-      if (button.checked) {
-        intervalId = setInterval(loadRandomImage, 5000);
-      } else {
-        clearInterval(intervalId);
-      }
-    }
+function toggleAutoLoad() {
+  var button = document.getElementById("toggle-button");
+
+  if (button.checked) {
+    intervalId = setInterval(loadRandomImage, 5000);
+  } else {
+    clearInterval(intervalId);
+  }
+}
+
   </script>
 </head>
 <body onload="loadRandomImage()">
